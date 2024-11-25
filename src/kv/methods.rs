@@ -8,7 +8,7 @@ pub struct Cache {
 pub trait CacheOperations {
     fn set(&self, key: Vec<u8>, value: Vec<u8>, ttl: time::Duration) -> Result<(), String>;
     fn get(&self, key: &[u8]) -> Result<Vec<u8>, String>;
-    fn has(&self, key: Vec<u8>) -> bool;
+    fn has(&self, key: &[u8]) -> bool;
     fn delete(&self, key: Vec<u8>) -> Result<(), String>;
 }
 
@@ -30,8 +30,8 @@ impl CacheOperations for Cache {
         .ok_or_else(|| "Key not found".to_string())
     }
 
-    fn has(&self, key: Vec<u8>) -> bool {
-        self.data.contains_key(&key)
+    fn has(&self, key: &[u8]) -> bool {
+        self.data.contains_key(key)
     }
     
     fn delete(&self, key: Vec<u8>) -> Result<(), String>{
