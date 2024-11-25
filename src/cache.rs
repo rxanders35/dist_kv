@@ -1,9 +1,13 @@
-use core::time;
-use std::fmt::Error;
+use std::sync::RwLock;
+use std::collections::HashMap;
+pub struct Cache {
+    data: RwLock<HashMap<Vec<u8>, String>>
+}
 
-pub trait Cache {
-    fn set(key: Vec<u8>, value: Vec<u8>, t: time::Duration) -> Error;
-    fn has(key: Vec<u8>) -> bool;
-    fn get(key: Vec<u8>) -> Result<Vec<u8>, Error>;
-    fn delete(key: Vec<u8>) -> Error;
+impl Cache {
+    pub fn new() -> Self {
+        Cache {
+            data: RwLock::new(HashMap::new()),
+        } 
+    }
 }
