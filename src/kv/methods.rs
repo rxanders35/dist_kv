@@ -9,7 +9,7 @@ pub trait CacheOperations {
     fn set(&self, key: Vec<u8>, value: Vec<u8>, ttl: time::Duration) -> Result<(), String>;
     fn get(&self, key: &[u8]) -> Result<Vec<u8>, String>;
     fn has(&self, key: &[u8]) -> bool;
-    fn delete(&self, key: Vec<u8>) -> Result<(), String>;
+    fn delete(&self, key: &[u8]) -> Result<(), String>;
 }
 
 impl Cache { pub fn new() -> Self { 
@@ -34,7 +34,7 @@ impl CacheOperations for Cache {
         self.data.contains_key(key)
     }
     
-    fn delete(&self, key: Vec<u8>) -> Result<(), String>{
+    fn delete(&self, key: &[u8]) -> Result<(), String>{
         Ok(())
     }
 }
